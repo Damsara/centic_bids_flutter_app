@@ -7,7 +7,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: BACKGROUND_COLOR,
-      body: Container(),
+      body: Container(
+        child: Center(child: Text('This is the main Screen')),
+      ),
     );
   }
 }

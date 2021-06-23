@@ -18,7 +18,7 @@ class CenticBidHead extends StatelessWidget {
         backgroundColor: BACKGROUND_COLOR,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: SPLASH_SCREEN,
+      initialRoute: '/',
       onGenerateRoute: routes.generateRoute,
       debugShowCheckedModeBanner: false,
     );

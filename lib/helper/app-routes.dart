@@ -12,9 +12,6 @@ Route<dynamic> generateRoute(RouteSettings settings){
     case MAIN_SCREEN:
       return MaterialPageRoute(builder: (context) => MainScreen());
 
-    case SPLASH_SCREEN:
-      return MaterialPageRoute(builder: (context) => SplashScreen());
-
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());
   }
