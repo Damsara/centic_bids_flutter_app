@@ -12,7 +12,6 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Counter example')),
       body: Consumer(
         // Rebuild only the Text when counterProvider updates
         builder: (context,  watch, child) {
@@ -46,7 +45,7 @@ class MainScreen extends ConsumerWidget {
           BottomNavigationBarItem(icon: new Icon(Icons.all_inbox_rounded), label: 'Bidding'),
           BottomNavigationBarItem(icon: new Icon(Icons.supervised_user_circle), label: 'Profile'),
         ],
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
       ),
     );
