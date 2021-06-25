@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-class MainScreen extends ConsumerWidget {
+class MainScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer(
         // Rebuild only the Text when counterProvider updates
@@ -34,19 +34,23 @@ class MainScreen extends ConsumerWidget {
           }
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (index) {
-          context.read(tabController.notifier).changeTab(index);
+      bottomNavigationBar: Consumer(
+        builder: (context,  watch, child) {
+          return BottomNavigationBar(
+            onTap: (index) {
+              context.read(tabController.notifier).changeTab(index);
+            },
+            currentIndex: watch(tabController),
+            items: [
+              BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: new Icon(Icons.search), label: 'Search'),
+              BottomNavigationBarItem(icon: new Icon(Icons.all_inbox_rounded), label: 'Bidding'),
+              BottomNavigationBarItem(icon: new Icon(Icons.supervised_user_circle), label: 'Profile'),
+            ],
+            backgroundColor: Colors.white,
+            type: BottomNavigationBarType.fixed,
+          );
         },
-        currentIndex: watch(tabController),
-        items: [
-          BottomNavigationBarItem(icon: new Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: new Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: new Icon(Icons.all_inbox_rounded), label: 'Bidding'),
-          BottomNavigationBarItem(icon: new Icon(Icons.supervised_user_circle), label: 'Profile'),
-        ],
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
       ),
     );
   }

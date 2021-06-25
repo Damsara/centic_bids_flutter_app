@@ -3,11 +3,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-final tabController = StateNotifierProvider<BottomNavModel , int>((ref) => BottomNavModel());
+final tabController = StateNotifierProvider<BottomNavViewModel , int>((ref) => BottomNavViewModel());
 
 
-class BottomNavModel extends StateNotifier<int>{
-  BottomNavModel() : super(0);
+class BottomNavViewModel extends StateNotifier<int>{
+  BottomNavViewModel() : super(0);
 
   void changeTab(int tabNumber) {
     state = tabNumber;
