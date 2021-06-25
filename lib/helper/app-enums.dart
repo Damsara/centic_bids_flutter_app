@@ -3,5 +3,6 @@
 enum EmailValidType{
   EMAIL_VALID,
   EMAIL_INVALID,
-  EMAIL_NOT_SET
+  EMAIL_NOT_SET,
+  EMAIL_EXISTS
 }

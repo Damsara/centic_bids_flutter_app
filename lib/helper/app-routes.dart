@@ -1,4 +1,5 @@
-import 'package:centic_bids/screens/login-screen.dart';
+import 'file:///D:/NewApps/centic_bids/lib/screens/authentication/login-screen.dart';
+import 'package:centic_bids/screens/authentication/register-screen.dart';
 import 'package:centic_bids/screens/main-screen.dart';
 import 'package:centic_bids/screens/splash-screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,6 +16,9 @@ Route<dynamic> generateRoute(RouteSettings settings){
 
     case LOGIN_SCREEN:
       return MaterialPageRoute(builder: (context) => LoginScreen());
+
+    case REGISTER_SCREEN:
+      return MaterialPageRoute(builder: (context) => RegisterScreen());
 
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());

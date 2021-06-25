@@ -6,7 +6,7 @@ import 'package:centic_bids/widgets/custom-button-widget.dart';
 import 'package:centic_bids/widgets/custom-textfield-widget.dart';
 import 'package:flutter/material.dart';
 
-import '../service-locator.dart';
+import '../../service-locator.dart';
 
 class LoginScreen extends StatelessWidget {
   @override
@@ -57,17 +57,20 @@ class LoginScreen extends StatelessWidget {
                 CustomButton(),
                 Container(
                   margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(30)),
-                  child: Center(
-                    child: RichText(text: TextSpan(
-                      children: [
-                        TextSpan(text: 'Don\'t have an account?',
-                            style: TextStyle(fontSize: 16 , color: Colors.black.withOpacity(0.6)),
-                        ),
-                        TextSpan(text: ' Sign up',
-                          style: TextStyle(fontSize: 16 , color: PRIMARY_COLOR , fontWeight: FontWeight.bold),
-                        )
-                      ]
-                    ),
+                  child: GestureDetector(
+                    onTap: () => locator<NavigationService>().pushReplacement(REGISTER_SCREEN),
+                    child: Center(
+                      child: RichText(text: TextSpan(
+                        children: [
+                          TextSpan(text: 'Don\'t have an account?',
+                              style: TextStyle(fontSize: 16 , color: Colors.black.withOpacity(0.6)),
+                          ),
+                          TextSpan(text: ' Sign up',
+                            style: TextStyle(fontSize: 16 , color: PRIMARY_COLOR , fontWeight: FontWeight.bold),
+                          )
+                        ]
+                      ),
+                      ),
                     ),
                   ),
                 )
