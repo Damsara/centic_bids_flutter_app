@@ -50,34 +50,18 @@ class RegisterScreen extends StatelessWidget {
                   margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(30)),
                   child: Text('Email Address' , style: TextStyle(color: Colors.black , fontSize: 16),),
                 ),
-                CustomTextField(),
+                CustomTextField(iconData: Icons.email , hideText: false),
                 Container(
                   margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(25)),
                   child: Text('Password' , style: TextStyle(color: Colors.black , fontSize: 16),),
                 ),
-                CustomTextField(),
+                CustomTextField(iconData: Icons.lock , hideText: true),
                 Container(
                   margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(25)),
                   child: Text('Confirm Password' , style: TextStyle(color: Colors.black , fontSize: 16),),
                 ),
-                CustomTextField(),
+                CustomTextField(iconData: Icons.lock , hideText: true ),
                 CustomButton(),
-                Container(
-                  margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(30)),
-                  child: Center(
-                    child: RichText(text: TextSpan(
-                        children: [
-                          TextSpan(text: 'Don\'t have an account?',
-                            style: TextStyle(fontSize: 16 , color: Colors.black.withOpacity(0.6)),
-                          ),
-                          TextSpan(text: ' Sign up',
-                            style: TextStyle(fontSize: 16 , color: PRIMARY_COLOR , fontWeight: FontWeight.bold),
-                          )
-                        ]
-                    ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
