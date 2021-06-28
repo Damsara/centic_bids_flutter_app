@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:centic_bids/helper/app-colors.dart';
 import 'package:centic_bids/helper/app-screen-utils.dart';
+import 'package:centic_bids/widgets/custom-alert-dialog.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -172,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                         ElevatedButton(
                           style: buttonStyle,
                             onPressed: (){
-
+                              customAlert(context: context , title: 'Login is Required' , contentBody: 'Please login so you can access the bid description and place your bid');
                             }, child: Text('Make Bid Offer'))
                       ],
                     ),
