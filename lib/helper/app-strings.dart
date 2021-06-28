@@ -8,3 +8,4 @@ const MAIN_SCREEN = 'main screen route';
 const SPLASH_SCREEN = '/';
 const LOGIN_SCREEN = 'login screen route';
 const REGISTER_SCREEN = 'register screen route';
+const BID_DESCRIPTION_SCREEN = 'bid description screen route';

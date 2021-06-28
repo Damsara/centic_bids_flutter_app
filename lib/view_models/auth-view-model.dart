@@ -1,7 +1,7 @@
 import 'package:centic_bids/helper/app-enums.dart';
 import 'package:centic_bids/helper/app-strings.dart';
 import 'package:centic_bids/service-locator.dart';
-import 'package:centic_bids/services/auth-service.dart';
+import 'file:///D:/NewApps/centic_bids/lib/services/firebase/auth-service.dart';
 import 'package:centic_bids/services/nav-service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
