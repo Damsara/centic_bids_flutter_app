@@ -7,8 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CustomButton extends StatelessWidget {
 
   final VoidCallback onTap;
+  final Color color;
+  final String buttonText;
 
-  CustomButton({this.onTap});
+  CustomButton({this.onTap , this.color , this.buttonText});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,11 @@ class CustomButton extends StatelessWidget {
         width: ScreenUtils.bodyWidth,
         height: ScreenUtils.getDesignHeight(50),
         decoration: BoxDecoration(
-          color: PRIMARY_COLOR,
+          color: color,
           borderRadius: BorderRadius.circular(5.0)
         ),
         child: Center(
-          child: Text('Login Now' , style: TextStyle(fontSize: 18 , fontWeight: FontWeight.bold , color: Colors.white),),
+          child: Text(buttonText , style: TextStyle(fontSize: 18 , fontWeight: FontWeight.bold , color: Colors.white),),
         )
       ),
     );

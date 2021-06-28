@@ -11,6 +11,7 @@ enum Validations{
   EMPTY,
   NONE,
   SUCCESS,
+  SAME,
   FAILED
 }
 
@@ -18,5 +19,10 @@ enum TextFields{
   EMAIL,
   PASSWORD,
   CONFIRM_PASSWORD
+}
+
+enum LoginState{
+  LOGGED,
+  NOT_LOGGED
 }
 

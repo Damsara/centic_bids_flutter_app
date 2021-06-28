@@ -131,6 +131,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 }),
                 CustomButton(
+                  buttonText: 'Login Now',
+                    color: PRIMARY_COLOR,
                     onTap: () => context
                         .read(loginAsyncNotifier.notifier)
                         .login(this.email, this.password)),
