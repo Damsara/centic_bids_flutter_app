@@ -1,8 +1,8 @@
 import 'package:centic_bids/helper/app-colors.dart';
-import 'package:centic_bids/screens/bids-screen.dart';
-import 'package:centic_bids/screens/home-screen.dart';
-import 'package:centic_bids/screens/profile-screen.dart';
-import 'package:centic_bids/screens/search-screen.dart';
+import 'package:centic_bids/screens/navigation/search-screen.dart';
+import 'file:///D:/NewApps/centic_bids/lib/screens/navigation/bids-screen.dart';
+import 'file:///D:/NewApps/centic_bids/lib/screens/navigation/home-screen.dart';
+import 'file:///D:/NewApps/centic_bids/lib/screens/navigation/profile-screen.dart';
 import 'package:centic_bids/view_models/bottom-nav-view-model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
