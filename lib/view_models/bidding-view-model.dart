@@ -37,5 +37,8 @@ final bidPrice = StateNotifierProvider<BiddingPrice , double>((ref) => BiddingPr
 class BiddingPrice extends StateNotifier<double>{
   BiddingPrice(double state) : super(0.0);
 
+  void addPrice(double price){
+    state = price;
+  }
 
 }

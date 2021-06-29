@@ -35,7 +35,6 @@ dependencies:
   firebase_auth: ^1.4.1
   cloud_firestore: ^2.2.2
   dots_indicator: ^2.0.0
-  timer_builder: ^2.0.0
   flutter_countdown_timer: ^4.1.0
 
 dev_dependencies:

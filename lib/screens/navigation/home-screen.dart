@@ -13,7 +13,6 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:centic_bids/widgets/custom-alert-dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:timer_builder/timer_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -78,7 +77,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   );
                 },
                 loading: (){
-                  return Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: Container(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator()),
+                  );
                 },
                 error: (Object object , StackTrace stacktrace){
                   return Text('An error has occured');
@@ -119,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 3),
-                      width: ScreenUtils.getDesignWidth(220),
+                      width: ScreenUtils.getDesignWidth(200),
                       child: Text(
                         item.description,
                         style: TextStyle(
@@ -147,7 +151,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 5),
-                          child: CountdownTimer(endTime: item.timer.millisecondsSinceEpoch,textStyle: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold , color: Colors.white),)
+                          child: CountdownTimer(endTime: item.timer.millisecondsSinceEpoch,textStyle: TextStyle(fontSize: 14 , fontWeight: FontWeight.bold , color: Colors.white),)
                         )
                       ],
                     ),
@@ -167,6 +171,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 child: CachedNetworkImage(
                   fit: BoxFit.fill,
                   imageUrl: item.first_image[0],
+                  placeholder: (context , url) => Center(
+                    child: Container(
+                        height: 50,
+                        width: 50,
+                        child: CircularProgressIndicator()),
+                  ),
                 ),
               ),
             ),

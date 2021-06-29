@@ -12,12 +12,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BidsDescriptionScreen extends StatelessWidget {
+class BidsDescriptionScreen extends StatefulWidget {
 
   final BidItem bidItemDetails;
-  final double val;
 
-  BidsDescriptionScreen({this.bidItemDetails , this.val});
+  BidsDescriptionScreen({this.bidItemDetails});
+
+  @override
+  _BidsDescriptionScreenState createState() => _BidsDescriptionScreenState();
+}
+
+class _BidsDescriptionScreenState extends State<BidsDescriptionScreen> {
+
+  double val;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     PageView.builder(
-                        itemCount: bidItemDetails.first_image.length,
+                        itemCount: widget.bidItemDetails.first_image.length,
                         itemBuilder: (BuildContext context , index){
                       return CachedNetworkImage(
                           fit: BoxFit.fill,
@@ -43,7 +50,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                                 width: 50,
                                 child: CircularProgressIndicator()),
                           ),
-                          imageUrl: bidItemDetails.first_image[index]);
+                          imageUrl: widget.bidItemDetails.first_image[index]);
                     },
                       onPageChanged: (int position) {
                         context.read(pageIndex.notifier).changePage(position);
@@ -59,7 +66,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 DotsIndicator(
-                                  dotsCount: bidItemDetails.first_image.length,
+                                  dotsCount: widget.bidItemDetails.first_image.length,
                                   position: model(pageIndex).toDouble(),
                                   decorator: DotsDecorator(
                                     size: const Size.square(9.0),
@@ -89,7 +96,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                           children: [
                             Container(
                               child: Text(
-                                bidItemDetails.title,
+                                widget.bidItemDetails.title,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -98,9 +105,9 @@ class BidsDescriptionScreen extends StatelessWidget {
                             ),
                             Container(
                               margin: EdgeInsets.only(top: 3),
-                              width: ScreenUtils.getDesignWidth(220),
+                              width: ScreenUtils.getDesignWidth(200),
                               child: Text(
-                                bidItemDetails.description,
+                                widget.bidItemDetails.description,
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black.withOpacity(0.6)),
@@ -123,7 +130,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                                 Icon(
                                   Icons.hourglass_bottom,
                                   color: Colors.white,
-                                ), CountdownTimer(endTime: bidItemDetails.timer.millisecondsSinceEpoch,textStyle: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold , color: Colors.white)),
+                                ), CountdownTimer(endTime: widget.bidItemDetails.timer.millisecondsSinceEpoch,textStyle: TextStyle(fontSize: 14 , fontWeight: FontWeight.bold , color: Colors.white)),
                               ],
                             ),
                           ),
@@ -148,7 +155,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.only(top: 3),
                                 child: Text(
-                                  '\$${bidItemDetails.base_price}',
+                                  '\$${widget.bidItemDetails.base_price}',
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
@@ -170,7 +177,7 @@ class BidsDescriptionScreen extends StatelessWidget {
                               Container(
                                 margin: EdgeInsets.only(top: 3),
                                 child: Text(
-                                  '\$${bidItemDetails.latest_bid}',
+                                  '\$${widget.bidItemDetails.latest_bid}',
                                   style: TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
@@ -191,12 +198,16 @@ class BidsDescriptionScreen extends StatelessWidget {
                               ),
                               Container(
                                 margin: EdgeInsets.only(top: 3),
-                                child: Text(
-                                  '',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green),
+                                child: Consumer(
+                                  builder: (_ , model , __){
+                                    return Text(
+                                      model(bidPrice) == 0.0 ? 'No Bids' : '\$${model(bidPrice)}',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green),
+                                    );
+                                  }
                                 ),
                               )
                             ],
@@ -211,8 +222,8 @@ class BidsDescriptionScreen extends StatelessWidget {
                     ),
                     Container(
                         margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(10)),
-                        child: CustomTextField(iconData: Icons.monetization_on ,hideText: false,type: TextInputType.number,)),
-                    CustomButton(color: PRIMARY_COLOR, buttonText: 'Place Bid Now',)
+                        child: CustomTextField(iconData: Icons.monetization_on ,hideText: false,type: TextInputType.number, onChanged: (value) => val = double.parse(value),)),
+                    CustomButton(color: PRIMARY_COLOR, buttonText: 'Place Bid Now', onTap: () => context.read(bidPrice.notifier).addPrice(this.val),)
                   ],
                 ),
               ),

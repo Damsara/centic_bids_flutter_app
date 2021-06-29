@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ? 'Please enter your password'
                                 : null);
                       }, loading: () {
-                    return CircularProgressIndicator();
+                    return Scaffold(body: CircularProgressIndicator());
                   }, error: (Object object, StackTrace stackTrace) {
                     return Text('Error');
                   });
