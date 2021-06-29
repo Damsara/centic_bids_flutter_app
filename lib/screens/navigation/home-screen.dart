@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:centic_bids/helper/app-colors.dart';
 import 'package:centic_bids/helper/app-screen-utils.dart';
+import 'package:centic_bids/helper/app-strings.dart';
 import 'package:centic_bids/models/bid-item.dart';
 import 'package:centic_bids/service-locator.dart';
 import 'package:centic_bids/services/firebase/data-service.dart';
+import 'package:centic_bids/services/nav-service.dart';
 import 'package:centic_bids/view_models/auth-view-model.dart';
 import 'package:centic_bids/view_models/bidding-view-model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:centic_bids/widgets/custom-alert-dialog.dart';
 import 'package:flutter/material.dart';
@@ -216,11 +219,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Consumer(
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(primary: PRIMARY_COLOR),
-                        onPressed: (){
-                          customAlert(context: context , title: 'Login is Required' , contentBody: 'Please login so you can access the bid description and place your bid');
-                        }, child: Text('Make Bid Offer')),
+                    builder: (_ , model , __){
+                      return model(authStateProvider).when(
+                          data: (User user){
+                            return ElevatedButton(
+                                style: ElevatedButton.styleFrom(primary: PRIMARY_COLOR),
+                                onPressed: (){
+                                  user == null ? customAlert(context: context , title: 'Login is Required' , contentBody: 'Please login so you can access the bid description and place your bid') : locator<NavigationService>().pushNamed(BID_DESCRIPTION_SCREEN);
+                                }, child: Text('Make Bid Offer'));
+                          },
+                          loading: () {
+                            return CircularProgressIndicator();
+                          },
+                          error: (Object object , StackTrace stack){
+                            return Text('Error has ooccured');
+                          });
+                    },
                   )
                 ],
               ),
