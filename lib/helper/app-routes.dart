@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'file:///D:/NewApps/centic_bids/lib/screens/authentication/login-screen.dart';
 import 'package:centic_bids/screens/authentication/register-screen.dart';
 import 'package:centic_bids/screens/bids-description-screen.dart';

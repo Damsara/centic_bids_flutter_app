@@ -14,7 +14,7 @@ class SplashViewModel extends StateNotifier<bool>{
 
   void changeScreen() {
     Timer(
-      Duration(seconds: 3), () => locator<NavigationService>().pushReplacement(LOGIN_SCREEN)
+      Duration(seconds: 3), () => locator<NavigationService>().pushReplacement(MAIN_SCREEN)
     );
   }
 }
