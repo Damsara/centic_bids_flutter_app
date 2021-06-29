@@ -12,8 +12,9 @@ class CustomTextField extends StatelessWidget {
   final TextFields textfield;
   final Function(String) onChanged;
   final String errorText;
+  final TextInputType type;
 
-  CustomTextField({this.iconData , this.hideText , this.textfield , this.onChanged , this.errorText});
+  CustomTextField({this.iconData , this.hideText , this.textfield , this.onChanged , this.errorText , this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +29,9 @@ class CustomTextField extends StatelessWidget {
           color: Colors.black,
           fontSize: 18,
         ),
-
         focusNode: FocusNode(),
         obscureText: hideText,
-        keyboardType: TextInputType.text,
+        keyboardType: type,
         onChanged: onChanged,
         cursorColor: PRIMARY_COLOR,
         decoration: InputDecoration(

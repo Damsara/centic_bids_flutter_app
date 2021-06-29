@@ -26,11 +26,11 @@ class LoginNotifier extends StateNotifier<AsyncValue<Validations>>{
   final Reader read;
 
   void login(String email , String password) async{
-    String output = await read(authServicesProvider).signIn(email: email , password: password);
     if (email == null || password == null || email.isEmpty || password.isEmpty){
       state = AsyncData(Validations.EMPTY);
       return;
     }
+    String output = await read(authServicesProvider).signIn(email: email , password: password);
     if (output == 'Success'){
       locator<NavigationService>().pushReplacement(MAIN_SCREEN);
     }

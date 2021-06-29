@@ -22,7 +22,7 @@ Route<dynamic> generateRoute(RouteSettings settings){
       return MaterialPageRoute(builder: (context) => RegisterScreen());
 
     case BID_DESCRIPTION_SCREEN:
-      return MaterialPageRoute(builder: (context) => BidsDescriptionScreen());
+      return MaterialPageRoute(builder: (context) => BidsDescriptionScreen(bidItemDetails: settings.arguments,));
 
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());

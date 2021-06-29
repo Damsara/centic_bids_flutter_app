@@ -9,26 +9,38 @@ import 'package:centic_bids/services/nav-service.dart';
 import 'package:centic_bids/view_models/auth-view-model.dart';
 import 'package:centic_bids/view_models/bidding-view-model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:centic_bids/widgets/custom-alert-dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:timer_builder/timer_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+
+  int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 30;
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     context.read(dataAsyncNotifier.notifier).getData();
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+
 
     return SafeArea(
       child: Container(
@@ -61,10 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView.builder(
                       itemCount: val.length,
                       itemBuilder: (BuildContext context , index){
-                        // print(val[index].description);
-                        // print(val[index].first_image[0]);
-                        // print(val[index].timer.toString());
-                        return _bidItem(val[index].title, val[index].description, val[index].first_image[0], val[index].base_price, val[index].latest_bid, val[index].timer.toString());
+                        return _bidItem(val[index]);
                     },),
                   );
                 },
@@ -80,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _bidItem(String title, String description , String image , double base , double latest , String duration){
+  Widget _bidItem(BidItem item){
 
     return Container(
       width: ScreenUtils.bodyWidth,
@@ -101,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Container(
                       child: Text(
-                        title,
+                        item.title,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -112,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       margin: EdgeInsets.only(top: 3),
                       width: ScreenUtils.getDesignWidth(220),
                       child: Text(
-                        description,
+                        item.description,
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.black.withOpacity(0.6)),
@@ -138,13 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 5),
-                          child: Text(
-                            '1:25:23',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
+                          child: CountdownTimer(endTime: item.timer.millisecondsSinceEpoch,textStyle: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold , color: Colors.white),)
                         )
                       ],
                     ),
@@ -163,14 +166,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 borderRadius: BorderRadius.circular(5.0),
                 child: CachedNetworkImage(
                   fit: BoxFit.fill,
-                  imageUrl: image,
+                  imageUrl: item.first_image[0],
                 ),
               ),
             ),
 
             Container(
-              margin:
-              EdgeInsets.only(top: ScreenUtils.getDesignHeight(20)),
+              margin: EdgeInsets.only(top: ScreenUtils.getDesignHeight(20)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -187,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         margin: EdgeInsets.only(top: 3),
                         child: Text(
-                          '\$$base',
+                          '\$${item.base_price}',
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -209,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         margin: EdgeInsets.only(top: 3),
                         child: Text(
-                          '\$$latest',
+                          '\$${item.latest_bid}',
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -225,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ElevatedButton(
                                 style: ElevatedButton.styleFrom(primary: PRIMARY_COLOR),
                                 onPressed: (){
-                                  user == null ? customAlert(context: context , title: 'Login is Required' , contentBody: 'Please login so you can access the bid description and place your bid') : locator<NavigationService>().pushNamed(BID_DESCRIPTION_SCREEN);
+                                  user == null ? customAlert(context: context , title: 'Login is Required' , contentBody: 'Please login so you can access the bid description and place your bid') : locator<NavigationService>().pushNamed(BID_DESCRIPTION_SCREEN , args: item);
                                 }, child: Text('Make Bid Offer'));
                           },
                           loading: () {
