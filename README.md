@@ -5,7 +5,7 @@
 
 Once cloning the project
 Please navigate to the pubspec.yaml file and perform a get call in order to get all dependancies
-After the get dependancies have been taken, the project should run with no issues 
+After the get dependancies have been taken, the project should run with no issue
 
 For running builds on the terminal
 Type in command flutter run on the terminal to get a debug build
