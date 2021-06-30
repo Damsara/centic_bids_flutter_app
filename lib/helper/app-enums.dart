@@ -12,7 +12,8 @@ enum Validations{
   NONE,
   SUCCESS,
   SAME,
-  FAILED
+  FAILED,
+  FORMAT
 }
 
 enum TextFields{

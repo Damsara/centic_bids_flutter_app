@@ -99,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ? 'Please enter email address'
                                 : val == Validations.FAILED
                                     ? 'Something went wrong'
-                                    : null,
+                                    : val == Validations.FORMAT ? 'Enter a valid email' : null,
                           );
                         },
                         loading: () => CircularProgressIndicator(),

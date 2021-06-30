@@ -40,6 +40,9 @@ class LoginNotifier extends StateNotifier<AsyncValue<Validations>>{
   }
 
   void register(String email , String password , String confirmpassword) async{
+
+    String output;
+
     if (email == null || password == null || email.isEmpty || password.isEmpty){
       state = AsyncData(Validations.EMPTY);
       return;
@@ -48,7 +51,12 @@ class LoginNotifier extends StateNotifier<AsyncValue<Validations>>{
       state = AsyncData(Validations.SAME);
       return;
     }
-    String output = await read(authServicesProvider).signUp(email , password);
+    if(email.contains('@')){
+       output = await read(authServicesProvider).signUp(email , password);
+    }else{
+      state = AsyncData(Validations.FORMAT);
+      return;
+    }
     if (output == "Created"){
       locator<NavigationService>().pushReplacement(MAIN_SCREEN);
     }else{
