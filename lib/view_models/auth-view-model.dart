@@ -48,7 +48,7 @@ class LoginNotifier extends StateNotifier<AsyncValue<Validations>>{
       state = AsyncData(Validations.SAME);
       return;
     }
-    String output = await locator<AuthenticationService>().singUp(email, password);
+    String output = await read(authServicesProvider).signUp(email , password);
     if (output == "Created"){
       locator<NavigationService>().pushReplacement(MAIN_SCREEN);
     }else{

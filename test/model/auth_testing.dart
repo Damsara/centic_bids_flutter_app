@@ -35,7 +35,7 @@ void main(){
     });
 
     test("sign up with email and password", () async {
-      String signedIn = await _repo.singUp('damasuperera@gmail.com' , '123456');
+      String signedIn = await _repo.signUp('damasuperera@gmail.com' , '123456');
       expect(signedIn, 'Created');
     });
 
